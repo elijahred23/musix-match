@@ -2,27 +2,31 @@ import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-
-const musicMatchURL = import.meta.env.VITE_API_URL; 
+import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
+import ChartApp from './components/Chart/ChartApp'
 
 function App() {
-  const artistSearch = async (country,page, pageSize) => {
-    try {
-      const response = await fetch(`${musicMatchURL}chartArtists?page=${page}&pageSize=${pageSize}&country=${country}`);
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error fetching artist search:", error);
-    }
-  };
   
   useEffect(()=>{
-    artistSearch('it', 1, 3);
   }, [])
   return ( 
     <>
       <div>
-      
+        <BrowserRouter>
+          <div>
+            <h1>Musix Match API</h1>
+            <div className="nav-links">
+              <NavLink to="/">Home</NavLink>
+            </div>
+            <div className="nav-links">
+              <NavLink to="/chart">Chart</NavLink>
+            </div>
+          </div> 
+          <Routes>
+            <Route path="/chart" element={<ChartApp />} />
+            <Route path="/" element={<div><h2>Home</h2></div>} />
+          </Routes>
+        </BrowserRouter> 
       </div>
     </>
   )
