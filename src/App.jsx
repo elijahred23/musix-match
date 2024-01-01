@@ -3,12 +3,12 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-const musicMatchURL = "http://localhost:3000"; 
+const musicMatchURL = import.meta.env.VITE_API_URL; 
 
 function App() {
   const artistSearch = async (country,page, pageSize) => {
     try {
-      const response = await fetch(`${musicMatchURL}/chartArtists?page=${page}&pageSize=${pageSize}&country=${country}`);
+      const response = await fetch(`${musicMatchURL}chartArtists?page=${page}&pageSize=${pageSize}&country=${country}`);
       const data = await response.json();
       return data;
     } catch (error) {

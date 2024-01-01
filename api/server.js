@@ -16,7 +16,6 @@ app.get('/', (req,res)=>{
     res.send('hello world!')
 })
 
-
 app.get('/chartArtists', async (req,res)=>{
     const {country, page, pageSize} = req.query;
     let chartArtists = await musicMatch.chartArtists(country,page, pageSize );
